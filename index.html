@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typing Speed || Coding Mobile</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <main>
         <div class="container">
@@ -16,20 +18,54 @@
             <div class="rightbox">
                 <div class="result">
                     <ul>
-                        <li><p>Name:&nbsp;<span>Praween Soni</span></p></li>
-                        <li><p class="timeleft">Time Left:&nbsp;<span>60</span>s</p></li>
-                        <li><p class="mistake">Mistakes:&nbsp;<span>0</span></p></li>
-                        <li><p class="wpm">WPM:&nbsp;<span>0</span></p></li>
-                        <li><p class="cpm">CPM:&nbsp;<span>0</span></p></li>
-                        <li><p>High Score:&nbsp;<span>0</span></p></li>
+                        <li>
+                            <p>User:&nbsp;<span>Praween Soni</span></p>
+                        </li>
+                        <li>
+                            <p class="timeleft">Time Left:&nbsp;<span>60</span>s</p>
+                        </li>
+                        <li>
+                            <p class="mistake">Mistakes:&nbsp;<span>0</span></p>
+                        </li>
+                        <li>
+                            <p class="wpm">WPM:&nbsp;<span>0</span></p>
+                        </li>
+                        <li>
+                            <p class="cpm">CPM:&nbsp;<span>0</span></p>
+                        </li>
+                        <li>
+                            <p>High Score:&nbsp;<span>0</span></p>
+                        </li>
                     </ul>
-                    <button>Try Again</button>
+                    <button>Refresh Paragraph</button>
+                    <hr style="margin: .4rem 0rem;">
+                    <button id="setting">Setting</button>
                 </div>
             </div>
         </div>
+        <div class="set_panel">
+            <div class="inputBox">
+                <label for="time">Time</label>
+                <br>
+                <input class="inparea" id="time" placeholder="Set Time" type="number">
+            </div>
+            <div class="inputBox">
+                <label for="user">Username</label>
+                <br>
+                <input class="inparea" id="user" placeholder="Your Username" type="text">
+            </div>
+            <div class="inputBox">
+                <label for="customPara">Paragraph</label>
+                <br>
+                <textarea class="inparea" id="customPara" spellcheck="true" placeholder="Enter Your Custom Paragraph" cols="30" rows="10"></textarea>
+            </div>
+        </div>
     </main>
-    <footer></footer>
+    <footer>
+        <p>Copyright © by <a href="https://praweensoni.netlify.app/">Pks</a></p>
+    </footer>
     <script src="paragraph.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

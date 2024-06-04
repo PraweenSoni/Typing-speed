@@ -4,6 +4,9 @@ const typeTxt = document.querySelector(".leftbox p"),
     wpmTag = document.querySelector(".wpm span"),
     cpmTag = document.querySelector(".cpm span"),
     mistakeTag = document.querySelector(".mistake span"),
+    set_panel = document.querySelector(".set_panel"),
+    container = document.querySelector(".container"),
+    setting_btn = document.getElementById("setting"),
     tryAgainBth = document.querySelector("button");
 
 let timer,
@@ -19,14 +22,16 @@ function rndPara() {
         let spanTag = `<span>${span}</span>`;
         typeTxt.innerHTML += spanTag;
     });
-    document.addEventListener("keydown", () => inpfield.focus());
+
+    tryAgainBth.addEventListener("click", () => inpfield.focus());
+    // document.addEventListener("keydown", () => inpfield.focus());        // Auto Typing
     typeTxt.addEventListener("click", () => inpfield.focus());
 }
 
 function initTyping() {
     const characters = typeTxt.querySelectorAll("span");
     let typedChar = inpfield.value.split("")[charIndex];
-    if (charIndex < characters.length -1 && timeleft > 0) {
+    if (charIndex < characters.length - 1 && timeleft > 0) {
         if (!isTyping) {
             timer = setInterval(initTimer, 1000);
             isTyping = true;
@@ -69,7 +74,7 @@ function initTimer() {
     }
 }
 
-function resetGame(){
+function resetGame() {
     rndPara();
     inpfield.value = "";
     clearInterval(timer);
@@ -84,3 +89,14 @@ function resetGame(){
 rndPara();
 inpfield.addEventListener("input", initTyping);
 tryAgainBth.addEventListener("click", resetGame);
+
+let value = 0;
+setting_btn.addEventListener("click", () => {
+    if (value === 0) {
+        set_panel.style.width = "20rem";
+        value = 1;
+    } else {
+        set_panel.style.width = "0rem";
+        value = 0;
+    }
+})
