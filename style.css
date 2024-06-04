@@ -80,13 +80,14 @@ main{
 .container .rightbox .result button{
     border-radius: 5px;
     height: 2.5rem;
-    width: 8rem;
+    width: 10rem;
     background-color: rgb(21, 244, 151, 0.7);
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 900;
     transition: 0.1s ease-in-out;
     border: 1px solid black;
+    color: white;
 }
 .container .rightbox .result button:hover{
     background-color: rgb(21, 244, 151, 1);
@@ -94,8 +95,33 @@ main{
 .container .rightbox .result button:active{
     transform: scale(0.97);
 }
+.set_panel{
+    width: 0rem;
+    height: 95vh;
+    background-color: rgb(21, 244, 151);
+    position: absolute;
+    right: 0;
+    overflow: hidden;
+    transition: .5s;
+    /* background: blur(15px); */
+}
+.set_panel .inputBox{
+    margin: 1rem 2rem;
+    width: 38vh;
+}
+.set_panel .inputBox .inparea{
+    width: 100%;
+    height: 2rem;
+}
 
+.set_panel .inputBox textarea{
+    resize: vertical;
+    max-height: 12rem;
+}
 footer{
+    display: flex;
+    align-items: center;
+    padding-left: 3vw;
     height: 5vh;
     width: 100vw;
     background-color: rgb(21, 244, 151);
