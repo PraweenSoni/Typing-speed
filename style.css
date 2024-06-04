@@ -1,128 +1,128 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-main{
-    height: 95vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+main {
+  height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.container{
-    border: 1px solid gray;
-    height: 50vh;
-    width: 70vw;
-    border-radius: 5px;
-    display: flex;
-}
-
-.container .inpField{
-    z-index: -999;
-    opacity: 0;
-    position: absolute;
-}
-.container .leftbox{
-    width: 80%;
-    padding: 2rem;
-    font-size: 1.2rem;
-    overflow: hidden;
+.container {
+  border: 1px solid gray;
+  height: 50vh;
+  width: 70vw;
+  border-radius: 5px;
+  display: flex;
 }
 
-.container .leftbox p{
-    letter-spacing: 1px;
-    word-break: break-all;
+.container .inpField {
+  z-index: -999;
+  opacity: 0;
+  position: absolute;
+}
+.container .leftbox {
+  width: 80%;
+  padding: 2rem;
+  font-size: 1.2rem;
+  overflow: hidden;
 }
 
-.container .leftbox p span{
-    position: relative;
+.container .leftbox p {
+  letter-spacing: 1px;
+  word-break: break-all;
 }
 
-.container .leftbox p span.correct{
-    color: rgb(21, 244, 151);
+.container .leftbox p span {
+  position: relative;
 }
-.container .leftbox p span.incorrect{
-    color: rgb(255, 0, 0);
-    outline: 1px solid #fff;
-    border-radius: 3px;
+
+.container .leftbox p span.correct {
+  color: rgb(21, 244, 151);
+}
+.container .leftbox p span.incorrect {
+  color: rgb(255, 0, 0);
+  outline: 1px solid #fff;
+  border-radius: 3px;
 }
 /* .container .leftbox p span.active{
     color: rgb(21, 244, 151);
 } */
-.container .leftbox p span.active::before{
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    border-left: 2px solid rgb(21, 244, 151);
-    opacity: 0;
-    animation: blink 1s ease-in-out infinite;
+.container .leftbox p span.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  border-left: 2px solid rgb(21, 244, 151);
+  opacity: 0;
+  animation: blink 1s ease-in-out infinite;
 }
 
-@keyframes blink{
-    50%{
-        opacity: 1;
-    }
+@keyframes blink {
+  50% {
+    opacity: 1;
+  }
 }
-.container .rightbox{
-    border-left: 1px solid gray;
-    width: 20%;
-    padding: 1rem;
-}
-
-.container .rightbox .result ul li{
-    display: flex;
-    margin: .8rem 0rem;
+.container .rightbox {
+  border-left: 1px solid gray;
+  width: 20%;
+  padding: 1rem;
 }
 
-.container .rightbox .result button{
-    border-radius: 5px;
-    height: 2.5rem;
-    width: 10rem;
-    background-color: rgb(21, 244, 151, 0.7);
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 900;
-    transition: 0.1s ease-in-out;
-    border: 1px solid black;
-    color: white;
-}
-.container .rightbox .result button:hover{
-    background-color: rgb(21, 244, 151, 1);
-}
-.container .rightbox .result button:active{
-    transform: scale(0.97);
-}
-.set_panel{
-    width: 0rem;
-    height: 95vh;
-    background-color: rgb(21, 244, 151);
-    position: absolute;
-    right: 0;
-    overflow: hidden;
-    transition: .5s;
-    /* background: blur(15px); */
-}
-.set_panel .inputBox{
-    margin: 1rem 2rem;
-    width: 38vh;
-}
-.set_panel .inputBox .inparea{
-    width: 100%;
-    height: 2rem;
+.container .rightbox .result ul li {
+  display: flex;
+  margin: 0.8rem 0rem;
 }
 
-.set_panel .inputBox textarea{
-    resize: vertical;
-    max-height: 12rem;
+.container .rightbox .result button {
+  border-radius: 5px;
+  height: 2.5rem;
+  width: 10rem;
+  background-color: rgb(21, 244, 151, 0.7);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 900;
+  transition: 0.1s ease-in-out;
+  border: 1px solid black;
+  color: white;
 }
-footer{
-    display: flex;
-    align-items: center;
-    padding-left: 3vw;
-    height: 5vh;
-    width: 100vw;
-    background-color: rgb(21, 244, 151);
+.container .rightbox .result button:hover {
+  background-color: rgb(21, 244, 151, 1);
+}
+.container .rightbox .result button:active {
+  transform: scale(0.97);
+}
+.set_panel {
+  width: 0rem;
+  height: 95vh;
+  background-color: rgb(21, 244, 151);
+  position: absolute;
+  right: 0;
+  overflow: hidden;
+  transition: 0.5s;
+  /* background: blur(15px); */
+}
+.set_panel .inputBox {
+  margin: 1rem 2rem;
+  width: 38vh;
+}
+.set_panel .inputBox .inparea {
+  width: 100%;
+  height: 2rem;
+}
+
+.set_panel .inputBox textarea {
+  resize: vertical;
+  max-height: 12rem;
+}
+footer {
+  display: flex;
+  align-items: center;
+  padding-left: 3vw;
+  height: 5vh;
+  width: 100vw;
+  background-color: rgb(21, 244, 151);
 }
