@@ -18,7 +18,7 @@
           <div class="result">
             <ul>
               <li>
-                <p>User:&nbsp;<span>Praween Soni</span></p>
+                <p>User:&nbsp;<span id="username"></span></p>
               </li>
               <li>
                 <p class="timeleft">Time Left:&nbsp;<span>60</span>s</p>
@@ -36,7 +36,7 @@
                 <p>High Score:&nbsp;<span>0</span></p>
               </li>
             </ul>
-            <button>Refresh Paragraph</button>
+            <button>Refresh</button>
             <hr style="margin: 0.4rem 0rem" />
             <button id="setting">Setting</button>
           </div>
@@ -44,23 +44,23 @@
       </div>
       <div class="set_panel">
         <div class="inputBox">
-          <label for="time">Time</label>
-          <br />
-          <input
-            class="inparea"
-            id="time"
-            placeholder="Set Time"
-            type="number"
-          />
-        </div>
-        <div class="inputBox">
           <label for="user">Username</label>
           <br />
           <input
             class="inparea"
-            id="user"
+            id="userInp"
             placeholder="Your Username"
             type="text"
+          />
+        </div>
+        <div class="inputBox">
+          <label for="time">Time</label>
+          <br />
+          <input
+            class="inparea"
+            id="timeInp"
+            placeholder="Set Time"
+            type="number"
           />
         </div>
         <div class="inputBox">
@@ -68,17 +68,20 @@
           <br />
           <textarea
             class="inparea"
-            id="customPara"
+            id="customParaInp"
             spellcheck="true"
             placeholder="Enter Your Custom Paragraph"
             cols="30"
-            rows="10"
+            rows="30"
           ></textarea>
+        </div>
+        <div class="inputBox">
+          <button type="submit" id="btn">Submit</button>
         </div>
       </div>
     </main>
     <footer>
-      <p>Copyright © by <a href="https://praweensoni.netlify.app/">Pks</a></p>
+      <p>Copyright © by <a href="https://praweensoni.netlify.app/">Pks.</a>&nbsp; All right reserved.</p>
     </footer>
     <script src="paragraph.js"></script>
     <script src="script.js"></script>
