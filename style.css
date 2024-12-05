@@ -116,6 +116,7 @@ main {
 
 .set_panel .inputBox textarea {
   resize: vertical;
+  min-height: 7rem;
   max-height: 12rem;
 }
 footer {
