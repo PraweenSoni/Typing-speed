@@ -92,7 +92,7 @@ inpfield.addEventListener("input", initTyping);
 tryAgainBth.addEventListener("click", resetGame);
 
 let value = 0;
-setting_btn.addEventListener("click", () => {
+function setting_panel(){
   if (value === 0) {
     set_panel.style.width = "20rem";
     value = 1;
@@ -100,4 +100,21 @@ setting_btn.addEventListener("click", () => {
     set_panel.style.width = "0rem";
     value = 0;
   }
+}
+setting_btn.addEventListener("click", () => {
+  setting_panel();
 });
+
+
+let user = document.getElementById("username");
+let btn = document.getElementById("btn");
+let userInp = document.getElementById("userInp")
+let timeInp = document.getElementById("timeInp")
+let customParaInp = document.getElementById("customParaInp")
+
+btn.addEventListener('click',()=>{
+  user.innerText = userInp.value;
+  customParaStr = customParaInp.value;   //bug not start typing speed fun.
+  rndPara();
+  setting_panel();
+})
