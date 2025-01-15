@@ -1,47 +1,58 @@
-const typeTxt = document.querySelector(".leftbox p"),
-  inpfield = document.querySelector(".inpField"),
+const typeText = document.querySelector(".leftbox p"),
+  inputField = document.querySelector(".inpField"),
   timeTag = document.querySelector(".timeleft span"),
   wpmTag = document.querySelector(".wpm span"),
   cpmTag = document.querySelector(".cpm span"),
-  mistakeTag = document.querySelector(".mistake span"),
-  set_panel = document.querySelector(".set_panel"),
-  container = document.querySelector(".container"),
-  setting_btn = document.getElementById("setting"),
-  tryAgainBth = document.querySelector("button");
+  mistakesTag = document.querySelector(".mistake span"),
+  settingsPanel = document.querySelector(".set_panel"),
+  settingsButton = document.getElementById("setting"),
+  resetButton = document.querySelector("button"),
+  usernameDisplay = document.getElementById("username"),
+  timeInput = document.getElementById("timeInp"),
+  customParagraphInput = document.getElementById("customParaInp"),
+  usernameInput = document.getElementById("userInp"),
+  saveButton = document.getElementById("btn");
 
-let timer,
+let timer = null,
   maxTime = 60,
-  timeleft = maxTime,
-  charIndex = (mistakes = isTyping = 0);
+  timeLeft = maxTime,
+  charIndex = 0,
+  mistakes = 0,
+  isTyping = false,
+  customParagraph = "";
 
-function rndPara() {
-  typeTxt.innerHTML = "";
-  let rndIdx = Math.floor(Math.random() * paragraphs.length);
-  paragraphs[rndIdx].split("").forEach((span) => {
-    let spanTag = `<span>${span}</span>`;
-    typeTxt.innerHTML += spanTag;
-  });
+// Generate and display a random or custom paragraph
+function loadParagraph() {
+  const paragraph = customParagraph || paragraphs[Math.floor(Math.random() * paragraphs.length)];
+  typeText.innerHTML = paragraph
+    .split("")
+    .map((char) => `<span>${char}</span>`)
+    .join("");
 
-  tryAgainBth.addEventListener("click", () => inpfield.focus());
-  // document.addEventListener("keydown", () => inpfield.focus());        // Auto Typing
-  typeTxt.addEventListener("click", () => inpfield.focus());
+  inputField.value = "";
+  inputField.focus();
 }
 
-function initTyping() {
-  const characters = typeTxt.querySelectorAll("span");
-  let typedChar = inpfield.value.split("")[charIndex];
-  if (charIndex < characters.length - 1 && timeleft > 0) {
+// Start the typing logic
+function handleTyping() {
+  const characters = typeText.querySelectorAll("span");
+  const typedChar = inputField.value[charIndex];
+
+  if (charIndex < characters.length && timeLeft > 0) {
     if (!isTyping) {
-      timer = setInterval(initTimer, 1000);
+      timer = setInterval(updateTimer, 1000);
       isTyping = true;
     }
-    if (typedChar == null) {
-      charIndex--;
-      if (characters[charIndex].classList.contains("incorrect")) {
-        mistakes--;
+
+    if (typedChar === undefined) {
+      // Handle backspace
+      if (charIndex > 0) {
+        charIndex--;
+        if (characters[charIndex].classList.contains("incorrect")) mistakes--;
+        characters[charIndex].className = "";
       }
-      characters[charIndex].classList.remove("correct", "incorrect");
     } else {
+      // Validate character
       if (characters[charIndex].innerText === typedChar) {
         characters[charIndex].classList.add("correct");
       } else {
@@ -50,71 +61,80 @@ function initTyping() {
       }
       charIndex++;
     }
-    characters.forEach((span) => span.classList.remove("active"));
-    characters[charIndex].classList.add("active");
 
-    let wpm = Math.round(
-      ((charIndex - mistakes) / 5 / (maxTime - timeleft)) * 60
-    );
-    wpm = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
-    mistakeTag.innerText = mistakes;
-    wpmTag.innerText = wpm;
-    cpmTag.innerText = charIndex - mistakes;
+    // Highlight the current character only if it is not a space
+    characters.forEach((char) => char.classList.remove("active"));
+    if (charIndex < characters.length && characters[charIndex].innerText !== " ") {
+      characters[charIndex].classList.add("active");
+    }
+
+    // Update stats
+    updateStats();
   } else {
-    inpfield.value = "";
+    clearInterval(timer);
+    inputField.value = "";
+  }
+}
+
+// Update the timer
+function updateTimer() {
+  if (timeLeft > 0) {
+    timeLeft--;
+    timeTag.innerText = timeLeft;
+  } else {
     clearInterval(timer);
   }
 }
 
-function initTimer() {
-  if (timeleft > 0) {
-    timeleft--;
-    timeTag.innerText = timeleft;
-  } else {
-    clearInterval(timer);
-  }
-}
-
+// Reset the game
 function resetGame() {
-  rndPara();
-  inpfield.value = "";
   clearInterval(timer);
-  timeleft = maxTime;
-  charIndex = mistakes = isTyping = 0;
-  timeTag.innerText = timeleft;
-  mistakeTag.innerText = mistakes;
+  timer = null;
+  timeLeft = maxTime;
+  charIndex = mistakes = 0;
+  isTyping = false;
+  timeTag.innerText = timeLeft;
+  mistakesTag.innerText = 0;
   wpmTag.innerText = 0;
   cpmTag.innerText = 0;
+  loadParagraph();
 }
 
-rndPara();
-inpfield.addEventListener("input", initTyping);
-tryAgainBth.addEventListener("click", resetGame);
+// Update WPM, CPM, and mistakes
+function updateStats() {
+  const wpm = Math.round(((charIndex - mistakes) / 5 / (maxTime - timeLeft)) * 60) || 0;
+  wpmTag.innerText = wpm;
+  cpmTag.innerText = charIndex - mistakes;
+  mistakesTag.innerText = mistakes;
+}
 
-let value = 0;
-function setting_panel(){
-  if (value === 0) {
-    set_panel.style.width = "20rem";
-    value = 1;
-  } else {
-    set_panel.style.width = "0rem";
-    value = 0;
+// Toggle settings panel
+function toggleSettingsPanel() {
+  const isOpen = settingsPanel.style.width === "20rem";
+  settingsPanel.style.width = isOpen ? "0rem" : "20rem";
+}
+
+// Save settings and apply changes
+function saveSettings() {
+  const username = usernameInput.value.trim();
+  usernameDisplay.innerText = username || "Unknown";
+
+  customParagraph = customParagraphInput.value.trim();
+  if (timeInput.value > 0) {
+    maxTime = parseInt(timeInput.value);
+    timeLeft = maxTime;
   }
+
+  resetGame();
+  toggleSettingsPanel();
 }
-setting_btn.addEventListener("click", () => {
-  setting_panel();
-});
 
+// Event Listeners
+resetButton.addEventListener("click", resetGame);
+settingsButton.addEventListener("click", toggleSettingsPanel);
+saveButton.addEventListener("click", saveSettings);
+inputField.addEventListener("input", handleTyping);
+typeText.addEventListener("click", () => inputField.focus());
 
-let user = document.getElementById("username");
-let btn = document.getElementById("btn");
-let userInp = document.getElementById("userInp")
-let timeInp = document.getElementById("timeInp")
-let customParaInp = document.getElementById("customParaInp")
-
-btn.addEventListener('click',()=>{
-  user.innerText = userInp.value;
-  customParaStr = customParaInp.value;   //bug not start typing speed fun.
-  rndPara();
-  setting_panel();
-})
+// Initialize
+loadParagraph();
